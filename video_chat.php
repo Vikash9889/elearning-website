@@ -1,0 +1,250 @@
+<?php
+ require('connection.php');
+ session_start();
+?>
+<html>
+<head>
+    <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>video chat</title>
+    <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/footer-style.css">
+   <link rel="stylesheet" href="css/stylesheet.css">
+   <style>
+    #root {
+        width: 100%;
+        height: 100%;
+        /* margin-top: -4%; */
+        }
+</style>
+</head>
+
+
+<body>
+    <header class="header">
+   
+        <section class="flex">
+     
+        <a href="index.php" class="logo"><img src="images/logo.svg"  alt="EduWeb logo"></a>
+
+     
+           <form action="search.php" method="post" class="search-form">
+              <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+              <button type="submit" class="fas fa-search"></button>
+           </form>
+     
+           <div class="icons">
+              <div id="menu-btn" class="fas fa-bars"></div>
+              <!-- <div id="search-btn" class="fas fa-search"></div> -->
+              <div id="user-btn" class="fas fa-user"></div>
+              <div id="toggle-btn" class="fas fa-sun"></div>
+           </div>
+     
+           <div class="profile">
+              <!-- <img src="images/pic-1.jpg" class="image" alt="">
+              <h3 class="name">Abhishek Yadav</h3>
+              <p class="role">studen</p>
+              <a href="profile.php" class="btn">view profile</a> -->
+              
+              <!-- <div class="flex-btn">
+                 <a href="login.php" class="option-btn">login</a>
+                 <a href="register.php" class="option-btn">register</a>
+              </div> -->
+     
+              <?php
+                 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']==true)
+                 {
+                    echo"
+                       <img src='images/pic-1.jpg' class='image'>
+                       <h3 class='name'>$_SESSION[username]</h3>
+                       <p class='role'>student</p>
+                       <a href='profile.php' class='btn'>view profile</a>
+                       <div class='flex-btn'>
+                          <a href='logout.php' class='option-btn'>logout</a>
+                       </div>
+           
+                    ";
+                 }
+                 else
+                 {
+                    echo"
+                       <div class='flex-btn'>
+                          <a href='login.php' class='option-btn'>login</a>
+                          <a href='register.php' class='option-btn'>register</a>
+                       </div>
+           
+                    ";
+                 }
+              ?>
+           </div>
+     
+        </section>
+     
+     </header>   
+     
+     <div class="side-bar">
+     
+        <div id="close-btn">
+           <i class="fas fa-times"></i>
+        </div>
+        
+        <?php
+        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']==true)
+        {
+           echo"
+     
+           <div class='profile'>
+           <img src='images/pic-1.jpg' class='image'>
+           <h3 class='name'>$_SESSION[username]</h3>
+           <p class='role'>student</p>
+           <div class='flex-btn'>
+              <a href='logout.php' class='option-btn'>logout</a>
+           </div>
+           </div>
+           
+           ";
+        }
+        else
+        {
+           echo"
+           <div class='profile'>
+              <img src='images/logo3.jpg' class='image-logo'>
+           </div>
+           
+           ";
+        }
+        ?>
+     
+        <nav class="navbar">
+           <a href="index.php"><i class="fas fa-home"></i><span>home</span></a>
+           <?php
+              if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']==true)
+              {
+                 echo"
+                    <a href='video_chat.php'><i class='fa-solid fa-video' style='color: #8e44ad;'></i><span>video chat</span></a>
+                 ";
+              }
+              else
+              {
+                 echo"
+                    <a href='about.php'><i class='fas fa-question'></i><span>about</span></a>
+                 ";
+              }
+           ?>
+           <a href="courses.php"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+           <a href="teachers.php"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
+           <a href="contact.php"><i class="fas fa-headset"></i><span>contact us</span></a>
+        </nav>
+     
+     </div>
+
+
+
+
+    <div id="root"></div>
+
+    <!-- footer section start -->
+
+<footer class="footer-main">
+    <div class="footer-container">
+     <div class="row">
+       <div class="footer-col">
+         <h4>company</h4>
+         <ul>
+           <li><a href="#">about us</a></li>
+           <li><a href="#">our services</a></li>
+           <li><a href="#">privacy policy</a></li>
+           <li><a href="#">affiliate program</a></li>
+         </ul>
+       </div>
+       <div class="footer-col">
+         <h4>get help</h4>
+         <ul>
+           <li><a href="#">FAQ</a></li>
+           <li><a href="#">Buy</a></li>
+           <li><a href="#">payment options</a></li>
+         </ul>
+       </div>
+       <div class="footer-col">
+         <h4>Courses</h4>
+         <ul>
+           <li><a href="#">Web Development</a></li>
+           <li><a href="#">Python</a></li>
+           <li><a href="#">Java</a></li>
+           <li><a href="#">C++</a></li>
+         </ul>
+       </div>
+       <div class="footer-col">
+         <h4>follow us</h4>
+         <div class="social-links">
+           <a href="#"><i class="fab fa-facebook-f"></i></a>
+           <a href="#"><i class="fab fa-twitter"></i></a>
+           <a href="#"><i class="fab fa-instagram"></i></a>
+           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+         </div>
+       </div>
+     </div>
+    </div>
+  </footer>
+ 
+ <!-- custom js file link  -->
+ <script src="js/script.js"></script>
+</body>
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+<script>
+window.onload = function () {
+    function getUrlParams(url) {
+        let urlStr = url.split('?')[1];
+        const urlSearchParams = new URLSearchParams(urlStr);
+        const result = Object.fromEntries(urlSearchParams.entries());
+        return result;
+    }
+
+
+        // Generate a Token by calling a method.
+        // @param 1: appID
+        // @param 2: serverSecret
+        // @param 3: Room ID
+        // @param 4: User ID
+        // @param 5: Username
+    const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
+    const userID = Math.floor(Math.random() * 10000) + "";
+    const userName = "userName" + userID;
+    const appID = 885460983;
+    const serverSecret = "96a693d7c22c369a1bf44c74ae52c66e";
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+    
+        const zp = ZegoUIKitPrebuilt.create(kitToken);
+        zp.joinRoom({
+            container: document.querySelector("#root"),
+            sharedLinks: [{
+                name: 'Personal link',
+                url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
+            }],
+            scenario: {
+                mode: ZegoUIKitPrebuilt.VideoConference,
+            },
+                
+           	turnOnMicrophoneWhenJoining: true,
+           	turnOnCameraWhenJoining: true,
+           	showMyCameraToggleButton: true,
+           	showMyMicrophoneToggleButton: true,
+           	showAudioVideoSettingsButton: true,
+           	showScreenSharingButton: true,
+           	showTextChat: true,
+           	showUserList: true,
+           	maxUsers: 2,
+           	layout: "Auto",
+           	showLayoutButton: false,
+         
+            });
+}
+</script>
+
+</html>
